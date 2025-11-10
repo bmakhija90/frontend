@@ -1,0 +1,55 @@
+<div class="dashboard-wrapper">
+
+  <h1 class="dashboard-title">Welcome to Admin Dashboard</h1>
+
+  <!-- 🔹 Dashboard summary cards -->
+  <div class="stats-row">
+    <mat-card class="dashboard-card sales">
+      <mat-icon class="card-icon">payments</mat-icon>
+      <h2>Total Sales</h2>
+      <p>{{ dashboardData.totalSales | currency:'GBP':'symbol':'1.0-0' }}</p>
+    </mat-card>
+
+    <mat-card class="dashboard-card products">
+      <mat-icon class="card-icon">inventory_2</mat-icon>
+      <h2>Total Products</h2>
+      <p>{{ dashboardData.totalProducts }}</p>
+    </mat-card>
+
+    <mat-card class="dashboard-card orders">
+      <mat-icon class="card-icon">shopping_cart</mat-icon>
+      <h2>Total Orders</h2>
+      <p>{{ dashboardData.totalOrders }}</p>
+    </mat-card>
+
+    <mat-card class="dashboard-card users">
+      <mat-icon class="card-icon">people</mat-icon>
+      <h2>Total Users</h2>
+      <p>{{ dashboardData.totalUsers }}</p>
+    </mat-card>
+  </div>
+
+  <!-- 🔹 Quick actions below the cards -->
+  <div class="quick-actions">
+    <button mat-raised-button color="primary" routerLink="/products/new">
+      <mat-icon>add</mat-icon>
+      Add New Product
+    </button>
+
+    <button mat-raised-button color="accent" routerLink="/products">
+      <mat-icon>inventory</mat-icon>
+      View Products
+    </button>
+
+     <button mat-raised-button color="warn" routerLink="/categories">
+        <mat-icon>category</mat-icon> Manage Categories
+    </button>
+  </div>
+
+  <!-- 🔹 Placeholder for other dashboard components -->
+  <div class="other-section">
+    <!-- Example: You can include charts, tables, etc. here -->
+    
+  </div>
+
+</div>

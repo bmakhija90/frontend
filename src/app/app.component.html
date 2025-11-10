@@ -1,0 +1,9 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span class="app-title">Admin Dashboard</span>
+  <span class="spacer"></span>
+  <button mat-button *ngIf="isAuthenticated()" (click)="logout()">Logout</button>
+</mat-toolbar>
+
+<main class="content">
+  <router-outlet></router-outlet>
+</main>

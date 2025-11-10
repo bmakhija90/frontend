@@ -1,0 +1,20 @@
+.category-container {
+  padding: 2rem;
+}
+
+.add-category-card {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.full-width-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+mat-form-field {
+  width: 250px;
+}
