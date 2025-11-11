@@ -15,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateProductDto, ProductResponseDto } from '../../../models/product.model';
 import { ProductService } from '../../../services/product.service';
 import { environment } from '../../../../environments/environment';
+import { Category } from '../../../models/category.model';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-product-form',
@@ -30,7 +32,8 @@ import { environment } from '../../../../environments/environment';
     MatCheckboxModule,
     MatSelectModule,
     MatChipsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
@@ -44,10 +47,10 @@ export class ProductFormComponent implements OnInit {
   selectedImageFiles: File[] = [];
   availableSizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
   selectedSizes: string[] = [];
+  categories: Category[] = [];
+  isLoadingCategories = false;
 
-  categories = [
-    'Clothing'
-  ];
+ 
 
   constructor(
     private fb: FormBuilder,
@@ -73,6 +76,23 @@ export class ProductFormComponent implements OnInit {
     if (this.isEditMode) {
       this.loadProduct();
     }
+    this.loadCategories();
+  }
+
+  loadCategories(): void {
+    this.isLoadingCategories = true;
+    this.productService.loadCategories().subscribe({
+      next: (categories) => {
+        console.log('Loaded categories:', categories);
+        this.categories = categories;
+        this.isLoadingCategories = false;
+      },
+      error: (error) => {
+        console.error('Error loading categories:', error);
+        this.isLoadingCategories = false;
+        // You might want to show a user-friendly error message here
+      }
+    });
   }
 
   loadProduct(): void {

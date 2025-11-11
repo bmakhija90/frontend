@@ -36,13 +36,29 @@
         </mat-error>
       </mat-form-field>
       
-      <mat-form-field appearance="outline" class="half-width">
+       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Category</mat-label>
         <mat-select formControlName="category" required>
-          <mat-option *ngFor="let category of categories" [value]="category">
-            {{ category }}
+          <!-- Loading state -->
+          <mat-option *ngIf="isLoadingCategories" disabled>
+            <mat-spinner diameter="20"></mat-spinner>
+            Loading categories...
+          </mat-option>
+          
+          <!-- Categories from database -->
+          <mat-option *ngFor="let category of categories" [value]="category.name">
+            {{ category.name }}
+            <span *ngIf="category.description"> - {{ category.description }}</span>
+          </mat-option>
+          
+          <!-- No categories state -->
+          <mat-option *ngIf="!isLoadingCategories && categories.length === 0" disabled>
+            No categories available. Please create categories first.
           </mat-option>
         </mat-select>
+        <mat-hint *ngIf="!isLoadingCategories && categories.length === 0">
+          No categories found. <a routerLink="/categories">Create categories first</a>
+        </mat-hint>
         <mat-error *ngIf="productForm.get('category')?.hasError('required')">
           Category is required
         </mat-error>

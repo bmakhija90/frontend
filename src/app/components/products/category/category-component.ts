@@ -12,12 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-
-interface Category {
-  id: string;
-  name: string;
-  description?: string;
-}
+import { Category } from '../../../models/category.model';
 
 @Component({
   selector: 'app-category',

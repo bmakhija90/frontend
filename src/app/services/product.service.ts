@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { CreateProductDto, ProductResponseDto } from '../models/product.model';
 import { environment } from '../../environments/environment';
+import { Category } from '../models/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,13 @@ createProduct(product: CreateProductDto, images: File[]): Observable<ProductResp
     );
   }
 
+  loadCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${environment.apiUrl}/api/products/categories`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
     if (error.error instanceof ErrorEvent) {
@@ -72,6 +80,6 @@ createProduct(product: CreateProductDto, images: File[]): Observable<ProductResp
     } else {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    return throwError(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 }
